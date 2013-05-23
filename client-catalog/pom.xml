@@ -1,0 +1,26 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>tch.code</groupId>
+    <artifactId>client-catalog</artifactId>
+    <version>0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>client-catalog</name>
+    <modules>
+        <module>../client-catalog-core</module>
+        <module>../client-catalog-persistence</module>
+        <module>../client-catalog-controller</module>
+        <module>../client-catalog-webapp</module>
+    </modules>
+    
+    <developers>
+        <developer>
+            <id>tch</id>
+            <name>Tomasz Chrul</name>
+            <email>tomasz.chrul@gmail.com.com</email>
+        </developer>
+    </developers>
+    
+
+</project>
