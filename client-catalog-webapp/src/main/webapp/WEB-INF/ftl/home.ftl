@@ -1,8 +1,8 @@
 <#include "/common/core_imports.ftl"/>
 <@siteContainer>
-	<@header/>
-	<@body>
-<table>
+<@header/>
+    <@body>
+<table class="client_list">
     <tr>        
         <th>ID</th>
         <th>Typ</th>
@@ -11,7 +11,7 @@
         <th>Nazwa</th>
         <th>Opis</th>
     </tr>
-   <#if client_list?? && client_list?size &gt; 0>                
+<#if client_list?? && client_list?size &gt; 0>                
     <#list client_list as val>
     <tr>
         <td>${val.clientId}</td>        		
@@ -22,9 +22,16 @@
         <td>${val.description!"-"}</td>
     </tr>
     </#list>
-    </#if>
-    
+</#if>
+
 </table>
+<h4>
+    <#list 1..page_count as i>        
+        <a href="#" class="'${i}'">${i}</a>
+    </#list>
+    Current page is: ${current_index}
+</h4>
+    
 
 
         <@footer/>

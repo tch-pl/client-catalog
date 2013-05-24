@@ -8,9 +8,9 @@
     <!-- Static content should be definied outside application, avoid definition like that in next lines  -->
     <link rel="stylesheet" href="/client-catalog/_css//pblog.css" type="text/css" />
     <!--jquery 1.3 -->
-    <script type="text/javascript" src="/client-catalog/js/jquery.min.js">
+    <script type="text/javascript" src="/client-catalog/_js/jquery.min.js">
     </script>
-    <script type="text/javascript" src="/client-catalog/jsrpc.js"></script>
+    <script type="text/javascript" src="/client-catalog/_js/rpc.js"></script>
                                
 </head>
 </#macro>

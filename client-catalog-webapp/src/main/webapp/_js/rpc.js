@@ -1,14 +1,16 @@
 $(document).ready(function() {
 
-	$('#main .sidebar a').live('click', function() {
-		// alert(this.className);
+	$('a').live('click', function() {
+		alert(this.className);
 		// server.Add($('num1').value, $(this.className, onAddSuccess);
-
+                var req_path = window.location.pathname +'?page='+ this.className;
+                alert(window.location.pathname +'?page='+ this.className);
 		var req = new XMLHttpRequest();
-		req.open('GET', window.location.pathname + '/ajax/' + this.className);
+		req.open('GET', window.location.pathname +'?'+ this.className);
 		req.onreadystatechange = function() {
 			if (req.readyState == 4 && req.status == 200) {
 				var response = req.responseText;
+                                alert("response "+response);
 				$('div.content').empty();
 				$('div.content').append(response);
 			}
