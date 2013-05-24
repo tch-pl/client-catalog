@@ -10,11 +10,13 @@
 <version>0.1-SNAPSHOT</version>
 <packaging>pom</packaging>
 * profiles: no profiles definied
+* running: go to main project and execute mvn clean install
+* you get client-catalog.war in target folder for client-catalog-webapp
 
 2) Used frameworks (version as specified inside project pom files):
-* spring 3
-* hibernate 3
-* @TO BE COMPLETED
+* Spring 3
+* Hibernate 3
+* Freemarker
 
 3)Runtime:
 * Java:
@@ -23,7 +25,7 @@
 - Jetty 
 * database: 
 - configured for derby [for another one application must be rebuilded after changes in context for data source configuration]
-- database schema included in project configuration
+- database schema included in project configuration [client-catalog/etc/sql]
 * web browser: 
 - any that supports JavaScript
 * all depedencies included in web module [WEB-INF/lib]
@@ -58,4 +60,21 @@ II. Web container
 III. Browser:
 1. Use localhost address.
 2. Application main page URL:
-* http://localhost:18080/client-catalog
+* for example:  http://localhost:18080/client-catalog
+
+
+********************************
+--- 3. TODO LIST ---------------              
+--------------------------------
+********************************
+1. View 
+* prepare table with sort and filtering (FTL/HTML + CSS + Ajax/Javascript)
+* activate form to add and edit (FTL/HTML + CSS + Ajax/Javascript)
+
+2. Controller
+* configure path for edition views
+* configure navigation
+
+3. DAO
+* resolve problem with inserts
+* do more sophisticated schema design
