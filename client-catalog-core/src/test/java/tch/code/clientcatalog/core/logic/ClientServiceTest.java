@@ -53,11 +53,25 @@ public class ClientServiceTest {
         clients.add(client5);
         clients.add(client6);
         
-        pagedClients = clientService.pageClients(3, clients);
-        assertEquals(pagedClients.size(), 2, pagedClients.toString() + " clients:" + clients.size());
+        pagedClients = clientService.pageClients(50, clients);
+        assertEquals(pagedClients.size(), 1, pagedClients.toString() + " clients:" + clients.size());
         
         pagedClients.clear();
+                
+        List<Page> pages = clientService.listPages(50, clients);
+        assertEquals(pages.size(), 1, pagedClients.toString() + " clients:" + clients.size());
         
+        pages.clear();
+        
+        pages = clientService.listPages(1, clients);
+        assertEquals(pages.size(), 6, pagedClients.toString() + " clients:" + clients.size());
+        
+        pages.clear();
+        
+        pages = clientService.listPages(6, clients);
+        assertEquals(pages.size(), 1, pagedClients.toString() + " clients:" + clients.size());
+        
+        pages.clear();
     }
     
 }

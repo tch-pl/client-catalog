@@ -59,7 +59,5 @@ public class ClientServiceImpl implements ClientService {
         this.clientDAO = clientDAO;
     }
 
-    public Map<Integer, List> pageClients(int pageCapacity) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+
 }

@@ -10,8 +10,9 @@ import tch.code.clientcatalog.core.service.data.model.ClientDTO;
  * @author tch
  */
 public class PagedList<T> {
+
     private Collection<T> givenCollection;
-    
+
     public PagedList(Collection<T> givenCollection) {
         this.givenCollection = givenCollection;
     }
@@ -21,53 +22,39 @@ public class PagedList<T> {
 
         int size = givenCollection.size();
         int currentIndex = 0;
-        int currentOffset = currentIndex + pageCapacity;
+        int currentOffset = size > pageCapacity ? currentIndex + pageCapacity : size;
 
         int pageIndex = 0;
+        if (size > 0) {
+            do {
 
-        while (isMoreThanOnePage(currentOffset, size + 1)) {
-            // put page content
-            pagedClients.put(pageIndex, Arrays.asList(givenCollection.toArray()).subList(currentIndex, currentOffset));
-
-            // calculte offsets
-            currentIndex += currentOffset;
-            pageIndex++;
-            if (isMoreThanOnePage(currentOffset, size)) {
-                currentOffset = currentIndex + pageCapacity;
-            } else {
-                currentOffset = currentIndex + (size - currentOffset);
-            }
+                // put page content
+                pagedClients.put(pageIndex, Arrays.asList(givenCollection.toArray()).subList(currentIndex, currentOffset));
+                // calculte offsets
+                
+                currentIndex += pageCapacity;
+                if (isMoreThanOnePage(currentOffset, size)) {
+                    currentOffset = currentIndex + pageCapacity;
+                } else {
+                    currentOffset = currentIndex + size;
+                }
+                pageIndex++;
+            } while (isMoreThanOnePage(currentOffset, size));
         }
+
         return pagedClients;
     }
-    
+
     public List<Page> pages(int pageCapacity) {
         List<Page> pages = new ArrayList<Page>();
-               
-
-        int size = givenCollection.size();
-        int currentIndex = 0;
-        int currentOffset = currentIndex + pageCapacity;
-
-        int pageIndex = 0;
-
-        while (isMoreThanOnePage(currentOffset, size + 1)) {
-            // put page content
-            pages.add(new Page(pageIndex, Arrays.asList(givenCollection.toArray()).subList(currentIndex, currentOffset)));
-
-            // calculte offsets
-            currentIndex += currentOffset;
-            pageIndex++;
-            if (isMoreThanOnePage(currentOffset, size)) {
-                currentOffset = currentIndex + pageCapacity;
-            } else {
-                currentOffset = currentIndex + (size - currentOffset);
-            }
+        Map<Integer, List> paged = this.pageAsMap(pageCapacity);
+        for (Integer index : paged.keySet()) {
+            pages.add(new Page(index, paged.get(index)));
         }
         return pages;
     }
 
     private boolean isMoreThanOnePage(int offset, int size) {
-        return size - offset > 0 ? true : false;
+        return size - offset >= 0 ? true : false;
     }
 }
