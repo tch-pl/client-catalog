@@ -1,5 +1,13 @@
 <form action="" method="POST">
-  Name: 
+  Type:
+  
+  
+  First name:
+  
+  
+  Last name:
+  
+  Company name:
   
   <@spring.formInput path, attributes, fieldType/>
   <input type="text" 

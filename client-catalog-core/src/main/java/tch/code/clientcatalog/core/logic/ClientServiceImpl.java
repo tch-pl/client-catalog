@@ -1,6 +1,11 @@
 package tch.code.clientcatalog.core.logic;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,23 +16,28 @@ import tch.code.clientcatalog.core.service.data.model.ClientDTO;
  *
  * @author tch
  */
-@Qualifier(value="ClientService")
+@Qualifier(value = "ClientService")
 public class ClientServiceImpl implements ClientService {
 
     private final static Logger logger = Logger.getLogger(ClientServiceImpl.class);
-        
     private ClientDAO clientDAO = null;
 
     public ClientServiceImpl() {
     }
-    
+
     @Transactional
     public Collection<ClientDTO> findAllClients() {
-        return clientDAO.findClients();        
+        return clientDAO.findClients();
     }
 
-    public Collection<ClientDTO> findClients(int offset, int capacity) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Map<Integer, List> pageClients(int pageCapacity, Collection<ClientDTO> clients) {
+        PagedList<ClientDTO> pagedClients = new PagedList<ClientDTO>(clients);               
+        return pagedClients.pageAsMap(pageCapacity);
+    }
+    
+    public List<Page> listPages(int pageCapacity, Collection<ClientDTO> clients) {
+        PagedList<ClientDTO> pagedClients = new PagedList<ClientDTO>(clients);               
+        return pagedClients.pages(pageCapacity);
     }
 
     public ClientDTO findClientById(int clientId) {
@@ -47,5 +57,9 @@ public class ClientServiceImpl implements ClientService {
 
     public void setClientDAO(ClientDAO clientDAO) {
         this.clientDAO = clientDAO;
+    }
+
+    public Map<Integer, List> pageClients(int pageCapacity) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

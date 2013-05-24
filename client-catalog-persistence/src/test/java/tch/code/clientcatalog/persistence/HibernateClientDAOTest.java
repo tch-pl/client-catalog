@@ -17,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 import tch.code.clientcatalog.core.service.data.dao.ClientDAO;
 import tch.code.clientcatalog.core.service.data.model.ClientDTO;
 import tch.code.clientcatalog.core.service.data.model.ClientType;
+import tch.code.clientcatalog.core.service.data.model.CompanyData;
+import tch.code.clientcatalog.persistence.mock.MockedClientDAO;
 
 /**
  *
@@ -30,15 +32,22 @@ public class HibernateClientDAOTest extends AbstractTransactionalJUnit4SpringCon
     @Autowired
     private ClientDAO clientDAO = null;
 
-    // TODO add test methods here. The name must begin with 'test'. For example:
-    @Test
+    @Test    
+    public void mockTest() {
+        MockedClientDAO mockedDAO = new MockedClientDAO();
+        mockedDAO.addClient(new ClientDTO());
+    }
+    
+    // Tests to run only when database is working
+    
+    //@Test
     @Transactional(propagation = Propagation.REQUIRED)
     public void findClientsTest() {
         List<ClientDTO> clients = clientDAO.findClients();
         assertTrue(clients.size() == 2);
     }
 
-    @Test
+    //@Test
     @Transactional(propagation = Propagation.REQUIRED)
     public void addAndRemoveClientsTest() {
         ClientDTO newOne = new ClientDTO();
@@ -50,20 +59,20 @@ public class HibernateClientDAOTest extends AbstractTransactionalJUnit4SpringCon
         assertNotNull(newOne.getClientId());
         logger.info(newOne.getClientId());
 
-//       List<ClientDTO> clients = clientDAO.findClients();
-//       assertTrue(clients.size() == 1);
+       List<ClientDTO> clients = clientDAO.findClients();
+       assertTrue(clients.size() == 1);
         clientDAO.removeClient(newOne);
         assertNull(newOne.getClientId());
-//       clients = clientDAO.findClients();
-//       assertTrue(clients.size() == 0);
-//       newOne = new ClientDTO();
-//       newOne.setCompanyData(new CompanyData());
-//       newOne.getCompanyData().setCompanyName("BIG COMPANY");
-//       clientDAO.addClient(newOne);
-//       assertTrue(clients.size() == 1);
-//       clientDAO.removeClient(newOne);
-//       clients = clientDAO.findClients();
-//       assertTrue(clients.size() == 0);
+       clients = clientDAO.findClients();
+       assertTrue(clients.size() == 0);
+       newOne = new ClientDTO();
+       newOne.setCompanyData(new CompanyData());
+       newOne.getCompanyData().setCompanyName("BIG COMPANY");
+       clientDAO.addClient(newOne);
+       assertTrue(clients.size() == 1);
+       clientDAO.removeClient(newOne);
+       clients = clientDAO.findClients();
+       assertTrue(clients.size() == 0);
 
     }
 }

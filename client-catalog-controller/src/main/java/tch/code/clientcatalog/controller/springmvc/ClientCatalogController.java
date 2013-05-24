@@ -2,6 +2,7 @@
  */
 package tch.code.clientcatalog.controller.springmvc;
 
+import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 import tch.code.clientcatalog.core.logic.ClientService;
+import tch.code.clientcatalog.core.service.data.dao.ClientDAO;
+import tch.code.clientcatalog.core.service.data.model.ClientDTO;
 
 /**
  *
@@ -16,6 +19,7 @@ import tch.code.clientcatalog.core.logic.ClientService;
  */
 @Controller(value = "ClientCatalogController")
 public class ClientCatalogController {
+    private final int PAGE_SIZE = 50;
     
     private ClientService clientService;
 
@@ -26,7 +30,9 @@ public class ClientCatalogController {
     
     @RequestMapping(value="/client_list.html", method=GET)
     public String listClients(Map<String, Object> model) {
-        model.put("client_list", clientService.findAllClients());
+        // always get first page
+        List<ClientDTO> clientsToView = clientService.pageClients(PAGE_SIZE, clientService.findAllClients()).get(0);
+        model.put("client_list", clientsToView);
         return "home";
     }
     

@@ -14,22 +14,24 @@ import tch.code.clientcatalog.core.service.data.model.ClientDTOBuilder;
  */
 public class MockedClientDAO implements ClientDAO {
 
+    List<ClientDTO> clients = new ArrayList<ClientDTO>();
+    
     public List<ClientDTO> findClients() {
-        List<ClientDTO> clients = new ArrayList<ClientDTO>();
+        
         ClientDTO client = ClientDTOBuilder.companyTypeClient();
         clients.add(client);
         return clients;
     }
 
     public void removeClient(ClientDTO client) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.clients.remove(client);
     }
 
     public void addClient(ClientDTO client) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.clients.add(client);
     }
 
     public void modifyClient(ClientDTO client) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.clients.contains(client);
     }
 }
