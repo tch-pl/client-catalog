@@ -11,11 +11,11 @@
                 http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
     <import resource="classpath:persistence-application-context.xml"/>
     
-    <bean name="ClientCatalogController" class="tch.code.clientcatalog.controller.springmvc.ClientCatalogController" scope="request">
+<!--    <bean name="ClientCatalogController" class="tch.code.clientcatalog.controller.springmvc.ClientCatalogController" scope="request">
         <aop:scoped-proxy />
         <property name="clientService"
                   ref="clientService" />
-    </bean>
+    </bean>-->
         
     <bean name="clientService" class="tch.code.clientcatalog.core.logic.ClientServiceImpl">
         <property name="clientDAO"

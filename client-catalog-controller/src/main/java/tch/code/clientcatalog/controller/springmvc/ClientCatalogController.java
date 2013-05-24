@@ -19,10 +19,25 @@ public class ClientCatalogController {
     
     private ClientService clientService;
 
+    @RequestMapping(method=GET, value="/client-catalog")
+    public String redirect(Map<String, Object> model) {
+        return "redirect:/client-catalog/client-list.html";
+    }
+    
     @RequestMapping(value="/client_list.html", method=GET)
     public String listClients(Map<String, Object> model) {
         model.put("client_list", clientService.findAllClients());
         return "home";
+    }
+    
+    @RequestMapping(value="/client_add_form.html", method=GET)
+    public String addClient(Map<String, Object> model) {        
+        return "edition";
+    }
+    
+    @RequestMapping(value="/client_edit_form.html", method=GET)
+    public String editClient(Map<String, Object> model) {
+        return "edition";
     }
 
     public ClientService getClientService() {

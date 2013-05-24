@@ -8,26 +8,29 @@ import javax.persistence.*;
  *
  * @author tch
  */
-@Entity
-@Table(name = "client_company")
+//@Entity
+//@Table(name = "client_company")
+//@SequenceGenerator(name = "seq_generator", 
+//                      sequenceName = "client_sequence")
 public class Company implements Serializable {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY,generator="seq_generator")
     private Long id;
     
     @Column(name = "company_name")
     private String companyName;
         
-    @Column(name="client_id")
-    private Long clientId;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name="client_id", referencedColumnName="id")
+    private Client client;
 
-    public Long getClientId() {
-        return clientId;
+    public Client getClientId() {
+        return client;
     }
 
-    public void setClientId(Long clientId) {
-        this.clientId = clientId;
+    public void setClientId(Client clientId) {
+        this.client = client;
     }
 
     public String getCompanyName() {

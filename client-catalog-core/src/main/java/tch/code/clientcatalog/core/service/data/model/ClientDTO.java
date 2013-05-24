@@ -11,6 +11,14 @@ public class ClientDTO {
     private PrivatePersonData privatePersonData = null;
     private String description = null;
     private Long clientId;
+
+    /** 
+     * initializes companyData and privatePersonData
+     **/
+    public ClientDTO() {
+        companyData = new CompanyData();
+        privatePersonData = new PrivatePersonData();
+    }
     
     public Long getClientId() {
         return clientId;

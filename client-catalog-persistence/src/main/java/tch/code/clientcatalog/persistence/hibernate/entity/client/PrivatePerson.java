@@ -3,7 +3,6 @@
 package tch.code.clientcatalog.persistence.hibernate.entity.client;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.*;
 
 /**
@@ -11,30 +10,33 @@ import javax.persistence.*;
  *
  * @author tch
  */
-@Entity
-@Table(name = "client_private_person")
+//@Entity
+//@Table(name = "client_private_person")
+//@SequenceGenerator(name = "seq_generator", 
+//                      sequenceName = "client_sequence")
 public class PrivatePerson implements Serializable {
 //    @OneToMany(mappedBy = "membersOfBoard")
 //    private List<Company> companys;
 
     @SuppressWarnings("unchecked")
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY,generator="seq_generator")
     private Integer id;
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
     
-    @Column(name="client_id")
-    private Long clientId;
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinColumn(name="client_id", referencedColumnName="id")
+    private Client client;
 
-    public Long getClientId() {
-        return clientId;
+    public Client getClientId() {
+        return client;
     }
 
-    public void setClientId(Long clientId) {
-        this.clientId = clientId;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public String getFirstName() {

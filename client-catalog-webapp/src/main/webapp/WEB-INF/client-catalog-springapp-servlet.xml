@@ -41,7 +41,7 @@
 	-->
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
-        <property name="cache" value="true" />
+        <property name="cache" value="false" />
         <property name="prefix" value="" />
         <property name="suffix" value=".ftl" />
         <property name="exposeSessionAttributes">
@@ -53,31 +53,5 @@
             <value>text/html;charset=UTF-8</value>
         </property>        
     </bean>
-
-    
-    <!--bean id="urlMapping"
-          class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping">        
-        <property name="interceptors">
-            <list>
-                <ref bean="loginInterceptor"/>
-                <ref bean="numberAccountInterceptor"/>
-                <ref bean="userContextSessionInterceptor"/>
-                <ref bean="mappingTabsInterceptor"/>
-                <ref bean="verifyOTPInterceptor"/>
-                <ref bean="checkFirstPageAfterLogin"/>
-            </list>
-        </property>
-    </bean>
-	
-    <bean id="ajaxUrlMapping"
-          class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">        
-        <property name="alwaysUseFullPath" value="true"/>
-        <property name="mappings">
-            <props>
-                <prop key="/ajax/**/*">ClientCatalogController</prop>
-            </props>
-        </property>
-    </bean--> 
-	
-    
+   
 </beans>

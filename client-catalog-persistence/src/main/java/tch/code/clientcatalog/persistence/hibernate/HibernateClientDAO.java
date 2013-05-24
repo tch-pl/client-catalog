@@ -6,40 +6,45 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import tch.code.clientcatalog.core.service.data.dao.ClientDAO;
 import tch.code.clientcatalog.core.service.data.model.ClientDTO;
-import tch.code.clientcatalog.persistence.hibernate.entity.client.Company;
+import tch.code.clientcatalog.persistence.hibernate.entity.client.Client;
+
 
 /**
  * hibernate based implementation of tch.code.clientcatalog.core.service.data.dao.
  * @author tch
  */
 @Repository
-public class HibernateClientDAO extends GenericHibernateDAO<Company> implements ClientDAO {
-    private Logger LOGGER = Logger.getLogger("HibernateCompanyDAO.class");
+public class HibernateClientDAO extends GenericHibernateDAO<Client> implements ClientDAO {
+    private static final ClientHibernateEntityBinder binder = new ClientHibernateEntityBinder();
     
     public HibernateClientDAO() {        
-        super(Company.class);
+        super(Client.class);
     }
     
 
-    public HibernateClientDAO(Class<Company> clazz) {
-        super(Company.class);
+    public HibernateClientDAO(Class<Client> clazz) {
+        super(Client.class);
     }
     public List<ClientDTO> findClients() {
-        List<Company> clients = this.findAll();
+        List<Client> clients = this.findAll();
         
-        return null;
+        return binder.buildDTOlist(clients);
     }
    
     public void removeClient(ClientDTO client) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.delete(client.getClientId());
     }
 
     public void addClient(ClientDTO client) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Long id = this.save(binder.buildEntity(client));
+        logger.info("Client " + id + " added");
+        client.setClientId(id);
     }
 
     public void modifyClient(ClientDTO client) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.update(binder.buildEntity(client));
+        logger.info("Client " + client.getClientId() + " removed");
+        client.setClientId(null);
     }
     
 }

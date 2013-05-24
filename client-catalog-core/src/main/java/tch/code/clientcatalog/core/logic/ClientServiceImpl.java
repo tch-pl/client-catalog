@@ -3,6 +3,7 @@ package tch.code.clientcatalog.core.logic;
 import java.util.Collection;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.transaction.annotation.Transactional;
 import tch.code.clientcatalog.core.service.data.dao.ClientDAO;
 import tch.code.clientcatalog.core.service.data.model.ClientDTO;
 
@@ -20,12 +21,7 @@ public class ClientServiceImpl implements ClientService {
     public ClientServiceImpl() {
     }
     
-    public ClientServiceImpl(ClientDAO dao) {
-        this.setClientDAO(clientDAO);
-    }
-    
-    
-    
+    @Transactional
     public Collection<ClientDTO> findAllClients() {
         return clientDAO.findClients();        
     }
@@ -45,11 +41,11 @@ public class ClientServiceImpl implements ClientService {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    protected ClientDAO getClientDAO() {
+    public ClientDAO getClientDAO() {
         return clientDAO;
     }
 
-    protected void setClientDAO(ClientDAO clientDAO) {
+    public void setClientDAO(ClientDAO clientDAO) {
         this.clientDAO = clientDAO;
     }
 }

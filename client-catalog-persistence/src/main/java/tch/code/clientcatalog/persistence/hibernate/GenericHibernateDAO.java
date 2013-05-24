@@ -1,17 +1,10 @@
 package tch.code.clientcatalog.persistence.hibernate;
 
-import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
 import javax.persistence.Entity;
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.hibernate.FlushMode;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 public abstract class GenericHibernateDAO<T> extends HibernateDaoSupport {
@@ -33,6 +26,7 @@ public abstract class GenericHibernateDAO<T> extends HibernateDaoSupport {
     }
 
     public Long save(T entity) {
+        getSessionFactory().getCurrentSession().setFlushMode(FlushMode.COMMIT);
         return (Long.valueOf(getSessionFactory().getCurrentSession().save(entity).toString()));
     }
 

@@ -11,10 +11,18 @@ import tch.code.clientcatalog.core.service.data.model.ClientDTO;
  */
 public interface ClientDAO {
 
+    /*
+     *
+     *
+     */
     List<ClientDTO> findClients();
 
     void removeClient(ClientDTO client);
 
+    /*
+     * returns id
+     *
+     */    
     void addClient(ClientDTO client);
 
     void modifyClient(ClientDTO client);
