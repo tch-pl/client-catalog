@@ -1,18 +1,16 @@
 $(document).ready(function() {
 
 	$('a').live('click', function() {
-		alert(this.className);
+		
 		// server.Add($('num1').value, $(this.className, onAddSuccess);
-                var req_path = window.location.pathname +'?page='+ this.className;
-                alert(window.location.pathname +'?page='+ this.className);
+                var req_path = window.location.protocol + '//' + window.location.host +'/client-catalog/ajax/client_list.html?page='+this.className;                
 		var req = new XMLHttpRequest();
-		req.open('GET', window.location.pathname +'?'+ this.className);
+		req.open('GET',req_path);
 		req.onreadystatechange = function() {
 			if (req.readyState == 4 && req.status == 200) {
-				var response = req.responseText;
-                                alert("response "+response);
-				$('div.content').empty();
-				$('div.content').append(response);
+				var response = req.responseText;                                
+				$('div#content').empty();
+				$('div#content').append(response);
 			}
 		}
 

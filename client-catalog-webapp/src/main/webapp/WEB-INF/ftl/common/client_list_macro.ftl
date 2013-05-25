@@ -1,8 +1,4 @@
-<#include "/common/core_imports.ftl"/>
-<#include "/common/client_list_macro.ftl"/>
-<@siteContainer>
-<@header/>
-    <@body>
+<#macro client_list_table>
 <div id="content">
 <table class="client_list">
     <tr>        
@@ -29,13 +25,9 @@
 </table>
 <h4>
     <#list 1..page_count as i>        
-        <a href="#" class="${i}" id="page_${i}">${i}</a>
+        <a href="#" class="${i}">${i}</a>
     </#list>
     Current page is: ${current_index}
 </h4>
 </div>
-
-
-        <@footer/>
-	</@body>
-</@siteContainer>
+</#macro>
