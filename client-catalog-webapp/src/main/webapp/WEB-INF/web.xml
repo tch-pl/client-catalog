@@ -56,14 +56,14 @@
         <location>/WEB-INF/error.html</location>
     </error-page>
 
-	 Welcome files 
+	 Welcome files -->
     <welcome-file-list>
-        <welcome-file>index.htm</welcome-file>
-    </welcome-file-list>	-->
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
 
     
     <session-config>
         <session-timeout>15</session-timeout>
     </session-config>
 
-</web-app>
+</web-app> 
