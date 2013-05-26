@@ -39,10 +39,7 @@
         <servlet-name>client-catalog-springapp</servlet-name>
         <url-pattern>*.html</url-pattern>		
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>client-catalog-springapp</servlet-name>
-        <url-pattern>/ajax/*.html</url-pattern>		
-    </servlet-mapping>
+
 	
 <!--    
     <error-page>
