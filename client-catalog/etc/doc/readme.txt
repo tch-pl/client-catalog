@@ -32,7 +32,7 @@
 
 4) Other info:
 * no automatic deployment	
-* SCM repository: git clone https://Tomasz.Chrul@code.google.com/p/client-catalog/ 
+* SCM repository: git clone https://code.google.com/p/client-catalog/ 
 
 
 ********************************
