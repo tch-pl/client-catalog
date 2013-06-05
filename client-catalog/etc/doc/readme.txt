@@ -78,3 +78,4 @@ III. Browser:
 3. DAO
 * resolve problem with inserts
 * do more sophisticated schema design
+* enable caching - maybe on service layer level?

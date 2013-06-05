@@ -8,10 +8,10 @@ import javax.persistence.*;
  *
  * @author tch
  */
-//@Entity
-//@Table(name = "client_company")
-//@SequenceGenerator(name = "seq_generator", 
-//                      sequenceName = "client_sequence")
+@Entity
+@Table(name = "client_company")
+@SequenceGenerator(name = "seq_generator", 
+                      sequenceName = "client_sequence")
 public class Company implements Serializable {
     
     @Id
@@ -22,10 +22,10 @@ public class Company implements Serializable {
     private String companyName;
         
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name="client_id", referencedColumnName="id")
+    @JoinColumn(name="client_id", referencedColumnName="client_id")
     private Client client;
 
-    public Client getClientId() {
+    public Client getClient() {
         return client;
     }
 

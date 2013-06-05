@@ -49,9 +49,7 @@ public class ClientCatalogController {
         model.put("client_list", clientsToView);
         model.put("page_count", paged_client_data.size());
         model.put("current_index", current_index);
-        if ("ajax".equals(mode)) {
-            return "client_list_table";
-        }
+        
         return "home";
     }
 

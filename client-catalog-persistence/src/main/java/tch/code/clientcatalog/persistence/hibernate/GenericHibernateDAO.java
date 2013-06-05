@@ -34,8 +34,8 @@ public abstract class GenericHibernateDAO<T> extends HibernateDaoSupport {
         getSessionFactory().getCurrentSession().delete(entity);
     }
 
-    public void delete(final Long id) {
-        getSessionFactory().getCurrentSession().createQuery(
+    public int delete(final Long id) {
+        return getSessionFactory().getCurrentSession().createQuery(
                         "DELETE " + persistentClass.getName()
                         + " WHERE id = ?").setLong(0, id).executeUpdate();
 

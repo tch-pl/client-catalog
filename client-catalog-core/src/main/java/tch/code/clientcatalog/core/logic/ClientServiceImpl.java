@@ -1,9 +1,6 @@
 package tch.code.clientcatalog.core.logic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.apache.log4j.Logger;
@@ -23,6 +20,7 @@ public class ClientServiceImpl implements ClientService {
     private ClientDAO clientDAO = null;
 
     public ClientServiceImpl() {
+        
     }
 
     @Transactional

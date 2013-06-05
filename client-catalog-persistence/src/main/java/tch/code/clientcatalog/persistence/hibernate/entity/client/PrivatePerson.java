@@ -10,10 +10,10 @@ import javax.persistence.*;
  *
  * @author tch
  */
-//@Entity
-//@Table(name = "client_private_person")
-//@SequenceGenerator(name = "seq_generator", 
-//                      sequenceName = "client_sequence")
+@Entity
+@Table(name = "client_private_person")
+@SequenceGenerator(name = "seq_generator", 
+                      sequenceName = "client_sequence")
 public class PrivatePerson implements Serializable {
 //    @OneToMany(mappedBy = "membersOfBoard")
 //    private List<Company> companys;
@@ -28,10 +28,10 @@ public class PrivatePerson implements Serializable {
     private String lastName;
     
     @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @JoinColumn(name="client_id", referencedColumnName="id")
+    @JoinColumn(name="client_id", referencedColumnName="client_id")
     private Client client;
 
-    public Client getClientId() {
+    public Client getClient() {
         return client;
     }
 

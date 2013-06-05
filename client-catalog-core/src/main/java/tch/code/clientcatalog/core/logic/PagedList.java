@@ -3,7 +3,6 @@
 package tch.code.clientcatalog.core.logic;
 
 import java.util.*;
-import tch.code.clientcatalog.core.service.data.model.ClientDTO;
 
 /**
  *
@@ -33,13 +32,13 @@ public class PagedList<T> {
                 // calculte offsets
                 
                 currentIndex += pageCapacity;
-                if (isMoreThanOnePage(currentOffset, size)) {
+                if (isMorePages(currentOffset, size)) {
                     currentOffset = currentIndex + pageCapacity;
                 } else {
                     currentOffset = currentIndex + size;
                 }
                 pageIndex++;
-            } while (isMoreThanOnePage(currentOffset, size));
+            } while (isMorePages(currentOffset, size));
         }
 
         return pagedClients;
@@ -54,7 +53,7 @@ public class PagedList<T> {
         return pages;
     }
 
-    private boolean isMoreThanOnePage(int offset, int size) {
+    private boolean isMorePages(int offset, int size) {
         return size - offset >= 0 ? true : false;
     }
 }

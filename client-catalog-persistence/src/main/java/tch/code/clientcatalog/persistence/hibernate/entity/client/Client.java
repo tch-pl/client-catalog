@@ -23,6 +23,22 @@ public class Client {
     private Long id;
     @Column(name = "description")
     private String description;
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public PrivatePerson getPrivatePerson() {
+        return privatePerson;
+    }
+
+    public void setPrivatePerson(PrivatePerson privatePerson) {
+        this.privatePerson = privatePerson;
+    }
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "client_type ")
     private ClientType type;
@@ -30,10 +46,10 @@ public class Client {
      * MAPPING TO USE IN FUTURE
     *
      */
-//    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "client")
-//    private Company company;
-//    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "client")
-//    private PrivatePerson privatePerson;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "client")
+    private Company company;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "client")
+    private PrivatePerson privatePerson;
     @Column(name = "company_name")
     private String companyName;
     @Column(name = "first_name")
