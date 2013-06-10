@@ -13,7 +13,7 @@ public class ClientDTOBuilder {
     public static ClientDTO privateTypeClient() {
         ClientDTO dto = rawTypeClient();        
         dto.setType(ClientType.PRIVATE);
-        dto.setPrivatePersonData(new PrivatePersonData());
+        dto.getPrivatePersonData().add(new PrivatePersonData());
         return dto;
     }
     

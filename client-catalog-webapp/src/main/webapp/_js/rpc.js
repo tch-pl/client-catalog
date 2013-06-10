@@ -1,5 +1,5 @@
 $(document).ready(function() {
-
+        
 	$('a').live('click', function() {
 		
 		// server.Add($('num1').value, $(this.className, onAddSuccess);

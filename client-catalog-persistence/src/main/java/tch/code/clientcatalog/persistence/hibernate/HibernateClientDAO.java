@@ -38,6 +38,7 @@ public class HibernateClientDAO extends GenericHibernateDAO<Client> implements C
 
     public void removeClient(ClientDTO client) {
         this.delete(client.getClientId());
+        logger.info("Client " + client.getClientId() + " removed");
         client.setClientId(null);
     }
 
@@ -49,8 +50,7 @@ public class HibernateClientDAO extends GenericHibernateDAO<Client> implements C
 
     public void modifyClient(ClientDTO client) {
         this.update(binder.buildEntity(client));
-        logger.info("Client " + client.getClientId() + " removed");
-        client.setClientId(null);
+        logger.info("Client " + client.getClientId() + " updated");        
     }
 
     public void deleteAllClients() {
@@ -63,6 +63,7 @@ public class HibernateClientDAO extends GenericHibernateDAO<Client> implements C
     }
 
     public ClientDTO findClient(Long clientId) throws ClientNotFoundException {
-        throw new ClientNotFoundException(clientId);
+        return binder.bindToDTO(this.getById(clientId));
+        
     }
 }

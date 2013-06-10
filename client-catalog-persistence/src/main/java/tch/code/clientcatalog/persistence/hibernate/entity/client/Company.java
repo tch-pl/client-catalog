@@ -10,19 +10,19 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "client_company")
-@SequenceGenerator(name = "seq_generator", 
-                      sequenceName = "client_sequence")
+@SequenceGenerator(name = "seq_generator",
+sequenceName = "client_sequence")
 public class Company implements Serializable {
-    
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY,generator="seq_generator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "seq_generator")
     private Long id;
-    
     @Column(name = "company_name")
     private String companyName;
-        
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name="client_id", referencedColumnName="client_id")
+//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinColumn(name="client_id")        
+    @JoinColumn(name = "client_id")
+    @ManyToOne
     private Client client;
 
     public Client getClient() {
@@ -41,7 +41,6 @@ public class Company implements Serializable {
         this.companyName = companyName;
     }
 
-
     public Long getId() {
         return id;
     }
@@ -49,5 +48,4 @@ public class Company implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    
 }

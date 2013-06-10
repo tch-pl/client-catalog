@@ -15,9 +15,6 @@ import javax.persistence.*;
 @SequenceGenerator(name = "seq_generator", 
                       sequenceName = "client_sequence")
 public class PrivatePerson implements Serializable {
-//    @OneToMany(mappedBy = "membersOfBoard")
-//    private List<Company> companys;
-
     @SuppressWarnings("unchecked")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY,generator="seq_generator")
@@ -27,8 +24,8 @@ public class PrivatePerson implements Serializable {
     @Column(name = "last_name")
     private String lastName;
     
-    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @JoinColumn(name="client_id", referencedColumnName="client_id")
+    @JoinColumn(name="client_id")
+    @ManyToOne
     private Client client;
 
     public Client getClient() {

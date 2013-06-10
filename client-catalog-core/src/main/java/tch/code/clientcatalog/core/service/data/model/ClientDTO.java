@@ -1,5 +1,8 @@
 package tch.code.clientcatalog.core.service.data.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author tch
@@ -8,7 +11,7 @@ public class ClientDTO {
     private ClientType type = ClientType.UNKNOWN;
     
     private CompanyData companyData = null;
-    private PrivatePersonData privatePersonData = null;
+    private List<PrivatePersonData> privatePersonData = null;
     private String description = null;
     private Long clientId;
 
@@ -16,8 +19,6 @@ public class ClientDTO {
      * initializes companyData and privatePersonData
      **/
     public ClientDTO() {
-        companyData = new CompanyData();
-        privatePersonData = new PrivatePersonData();
     }
     
     public Long getClientId() {
@@ -44,11 +45,14 @@ public class ClientDTO {
         this.companyData = companyData;
     }
 
-    public PrivatePersonData getPrivatePersonData() {
+    public List<PrivatePersonData> getPrivatePersonData() {
+        if (privatePersonData == null) {
+            privatePersonData = new ArrayList<PrivatePersonData>();
+        }
         return privatePersonData;
     }
 
-    public void setPrivatePersonData(PrivatePersonData privatePersonData) {
+    public void setPrivatePersonData(List<PrivatePersonData> privatePersonData) {
         this.privatePersonData = privatePersonData;
     }
 

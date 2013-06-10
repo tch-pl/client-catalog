@@ -15,8 +15,8 @@
         <td>${val.clientId}</td>        		
         <td>${val.type!"-"}</td>
         <td>${val.companyData.companyName!"-"}</td>
-        <td>${val.privatePersonData.firstName!"-"}</td>
-        <td>${val.privatePersonData.lastName!"-"}</td>
+        <td><#--${val.privatePersonData.firstName!"-"}--></td>
+        <td><#--${val.privatePersonData.lastName!"-"}--></td>
         <td>${val.description!"-"}</td>
     </tr>
     </#list>

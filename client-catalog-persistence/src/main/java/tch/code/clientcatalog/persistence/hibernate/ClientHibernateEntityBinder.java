@@ -14,12 +14,14 @@ import tch.code.clientcatalog.persistence.hibernate.entity.client.PrivatePerson;
 
 /**
  * Utility class for data binding
+ *
  * @author tch
  */
 public class ClientHibernateEntityBinder {
-    
+
     /**
      * DTO to entity binding
+     *
      * @param clientDTO
      * @return proper corresponding entity instance
      */
@@ -38,23 +40,21 @@ public class ClientHibernateEntityBinder {
 
     /**
      * DTO to entity binding
-     * @param clientDTO
+     *
+     * @param private person DTO
      * @return proper corresponding entity instance
      */
-    protected PrivatePerson buildPrivatePersonEntity(ClientDTO clientDTO) {
-        if (!ClientType.PRIVATE.equals(clientDTO.getType())) {
-            return null;
-        }
-
-        PrivatePerson privatePerson = new PrivatePerson();
-        privatePerson.setFirstName(clientDTO.getPrivatePersonData().getFirstName());
-        privatePerson.setLastName(clientDTO.getPrivatePersonData().getLastName());
-        return privatePerson;
-
+    protected PrivatePerson buildPrivatePersonEntity(PrivatePersonData privatePerson, Client parent) {
+        PrivatePerson privatePersonEntity = new PrivatePerson();
+        privatePersonEntity.setFirstName(privatePerson.getFirstName());
+        privatePersonEntity.setLastName(privatePerson.getLastName());
+        privatePersonEntity.setClient(parent);
+        return privatePersonEntity;
     }
 
     /**
      * DTO to entity binding
+     *
      * @param clientDTO
      * @return proper corresponding entity instance
      */
@@ -62,17 +62,24 @@ public class ClientHibernateEntityBinder {
         Client client = new Client();
         client.setId(clientDTO.getClientId());
         client.setType(clientDTO.getType());
-        client.setCompanyName(clientDTO.getCompanyData().getCompanyName());
-        client.setFirstName(clientDTO.getPrivatePersonData().getFirstName());
-        client.setLastName(clientDTO.getPrivatePersonData().getLastName());
+        if (ClientType.PRIVATE.equals(clientDTO.getType())) {
+            for (PrivatePersonData privatePerson : clientDTO.getPrivatePersonData()) {
+                client.getPrivatePersons().add(buildPrivatePersonEntity(privatePerson, client));
+            }
+        }
+        if (ClientType.COMPANY.equals(clientDTO.getType())) {
+            client.setCompany(new Company());
+            client.getCompany().setCompanyName(clientDTO.getCompanyData().getCompanyName());
+
+        }
         client.setDescription(clientDTO.getDescription());
 
         return client;
-
     }
 
     /**
      * utility method
+     *
      * @param entities
      * @return copies data from dto list to entity list
      */
@@ -88,32 +95,31 @@ public class ClientHibernateEntityBinder {
 
     /**
      * entity to DTO binding
+     *
      * @param clientDTO
      * @return proper corresponding DTO instance
-     **/
+     *
+     */
     public ClientDTO bindToDTO(Client entity) {
         ClientDTO dto = new ClientDTO();
         if (entity != null) {
             dto.setClientId(entity.getId());
             dto.setType(entity.getType());
             dto.setDescription(entity.getDescription());
-            //dto.setPrivatePersonData(bindToDTO(entity.));
-            //dto.setCompanyData(bindToDTO(entity.getCompany()));
-            PrivatePersonData privatePersonData = new PrivatePersonData();
-            privatePersonData.setFirstName(entity.getFirstName());
-            privatePersonData.setLastName(entity.getLastName());
-            dto.setPrivatePersonData(privatePersonData);
-            CompanyData companyData = new CompanyData();
-            companyData.setCompanyName(entity.getCompanyName());
-            dto.setCompanyData(companyData);                    
+            if (ClientType.PRIVATE.equals(entity.getType())) {
+                for (PrivatePerson privatePerson : entity.getPrivatePersons()) {
+                    dto.getPrivatePersonData().add(bindToDTO(privatePerson));
+                }
+            }
+            if (ClientType.COMPANY.equals(entity.getType())) {
+                CompanyData companyData = new CompanyData();
+                companyData.setCompanyName(entity.getCompanyName());
+                dto.setCompanyData(companyData);
+            }
         }
         return dto;
     }
-    
-    
-    /**
-     * TO USE IN FUTURE
-     
+
     protected PrivatePersonData bindToDTO(PrivatePerson entity) {
         PrivatePersonData dto = new PrivatePersonData();
         if (entity != null) {
@@ -130,5 +136,4 @@ public class ClientHibernateEntityBinder {
         }
         return dto;
     }
-    * **/
 }
